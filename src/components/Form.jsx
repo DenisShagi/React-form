@@ -1,9 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { MainContainer } from "./MainConainer";
+import { MainContainer } from "./MainContainer";
 import { Input } from "./Input";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { PrimaryButton } from "./PrimaryButton";
-import { IMaskInput } from "react-imask";
+import { MaskedInput } from "./MaskedInput";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -21,16 +21,15 @@ const schema = yup.object().shape({
     .required("Поле является обязательным"),
   email: yup.string().email("Введен некорректный адрес почты"),
   phoneNumber: yup
-  .string()
-  .required("Поле является обязательным")
-  .matches(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, "Некорректный формат номера"),
+    .string()
+    .required("Поле является обязательным")
+    .matches(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, "Некорректный формат номера"),
 });
 
 export const Form = ({ children, ...props }) => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
@@ -93,9 +92,15 @@ export const Form = ({ children, ...props }) => {
           type="tel"
           label="Мобильный телефон"
           name="phoneNumber"
-
+          slotProps={{
+            input: {
+              inputComponent: MaskedInput,
+            },
+          }}
+          error={!!errors.phoneNumber}
+          helperText={errors?.phoneNumber?.message}
         />
-        
+
         <PrimaryButton />
       </form>
     </MainContainer>
