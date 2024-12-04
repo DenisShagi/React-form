@@ -1,10 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { MainContainer } from "./MainConainer";
 import { Input } from "./Input";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { PrimaryButton } from "./PrimaryButton";
+import { IMaskInput } from "react-imask";
 import * as yup from "yup";
-import parsePhoneNumberFromString from "libphonenumber-js";
 
 const schema = yup.object().shape({
   lastName: yup
@@ -20,21 +20,17 @@ const schema = yup.object().shape({
     .matches(/^([^0-9]*)$/, "Поле содержит недопустимые символы")
     .required("Поле является обязательным"),
   email: yup.string().email("Введен некорректный адрес почты"),
+  phoneNumber: yup
+  .string()
+  .required("Поле является обязательным")
+  .matches(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, "Некорректный формат номера"),
 });
 
-const normalizePhoneNumber = (value) => {
-    const phoneNumber = parsePhoneNumberFromString(value)
-    if(!phoneNumber){
-        return value
-    }
-    return(
-        phoneNumber.formatInternational()
-    )
-}
 export const Form = ({ children, ...props }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
@@ -92,16 +88,14 @@ export const Form = ({ children, ...props }) => {
           helperText={errors?.email?.message}
         />
         <Input
-        {...register("phoneNumber")}
+          {...register("phoneNumber")}
           id="phoneNumber"
           type="tel"
           label="Мобильный телефон"
           name="phoneNumber"
-          onChange={(event) => {
-            event.target.value = normalizePhoneNumber(event.target.value)
-          }}
-         
+
         />
+        
         <PrimaryButton />
       </form>
     </MainContainer>
