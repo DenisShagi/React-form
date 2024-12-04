@@ -4,8 +4,8 @@ import React from "react";
 export const MainContainer = ({ children, ...props }) => {
   return (
     <Container
-      container="main"
-      maxWidth="xl"
+      component="main"
+
       sx={{
         marginTop: (theme) => theme.spacing(4),
         display: "flex",

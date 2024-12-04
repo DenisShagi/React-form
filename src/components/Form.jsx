@@ -4,6 +4,9 @@ import { Input } from "./Input";
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "./PrimaryButton";
 import { MaskedInput } from "./MaskedInput";
+import { GenderSelect } from "./GenderSelect";
+import { BirthdayPicker } from "./BirthdayPicker";
+import styles from "../App.module.scss";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -24,12 +27,14 @@ const schema = yup.object().shape({
     .string()
     .required("Поле является обязательным")
     .matches(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, "Некорректный формат номера"),
+  birthday: yup.date().required("Поле является обязательным"),
 });
 
 export const Form = ({ children, ...props }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
@@ -44,10 +49,7 @@ export const Form = ({ children, ...props }) => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        sx={{
-          marginTop: (theme) => theme.spacing(1),
-          width: "100%",
-        }}
+        className={styles.form}
         {...props}
       >
         <Input
@@ -56,6 +58,7 @@ export const Form = ({ children, ...props }) => {
           type="text"
           label="Фамилия"
           name="lastName"
+          variant="filled"
           error={!!errors.lastName}
           helperText={errors?.lastName?.message}
         />
@@ -65,6 +68,7 @@ export const Form = ({ children, ...props }) => {
           type="text"
           label="Имя"
           name="firstName"
+          variant="filled"
           error={!!errors.firstName}
           helperText={errors?.firstName?.message}
         />
@@ -74,24 +78,19 @@ export const Form = ({ children, ...props }) => {
           type="text"
           label="Отчество"
           name="surname"
+          variant="filled"
           error={!!errors.surname}
           helperText={errors?.surname?.message}
         />
-        <Input
-          {...register("email")}
-          id="email"
-          type="email"
-          label="Email (необязательно)"
-          name="email"
-          error={!!errors.email}
-          helperText={errors?.email?.message}
-        />
+        <GenderSelect register={register} errors={errors} />
+        <BirthdayPicker control={control} errors={errors} />
         <Input
           {...register("phoneNumber")}
           id="phoneNumber"
           type="tel"
           label="Мобильный телефон"
           name="phoneNumber"
+          variant="filled"
           slotProps={{
             input: {
               inputComponent: MaskedInput,
@@ -99,6 +98,36 @@ export const Form = ({ children, ...props }) => {
           }}
           error={!!errors.phoneNumber}
           helperText={errors?.phoneNumber?.message}
+        />
+        <Input
+          {...register("email")}
+          id="email"
+          type="email"
+          label="Email (необязательно)"
+          name="email"
+          variant="filled"
+          error={!!errors.email}
+          helperText={errors?.email?.message}
+        />
+        <Input
+
+          id="address"
+          type="text"
+          label="Адрес постоянной регистрации"
+          name="address"
+          variant="filled"
+          error={!!errors.email}
+          helperText={errors?.email?.message}
+        />
+        <Input
+
+          id="employer"
+          type="employer"
+          label="Название работодателя"
+          name="employer"
+          variant="filled"
+          error={!!errors.email}
+          helperText={errors?.email?.message}
         />
 
         <PrimaryButton />

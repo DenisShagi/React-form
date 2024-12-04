@@ -13,3 +13,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 12px;
+  justify-content: center;
+  align-content: flex-start;
+
+
+  margin: 0 auto;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 12px;
+  width: 650px;
+}
+
+form > :nth-child(1),
+form > :nth-child(2),
+form > :nth-child(3),
+form > :nth-child(8), 
+form > :nth-child(9) {
+  grid-column: span 2;
+}
+
+form > button {
+  grid-column: span 2;
+  justify-self: end;
+}
