@@ -20,8 +20,7 @@ const schema = yup.object().shape({
     .required("Поле является обязательным"),
   surname: yup
     .string()
-    .matches(/^([^0-9]*)$/, "Поле содержит недопустимые символы")
-    .required("Поле является обязательным"),
+    .matches(/^([^0-9]*)$/, "Поле содержит недопустимые символы"),
   email: yup.string().email("Введен некорректный адрес почты"),
   phoneNumber: yup
     .string()
