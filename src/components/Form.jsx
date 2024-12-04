@@ -30,6 +30,18 @@ const schema = yup.object().shape({
   birthday: yup.date().required("Поле является обязательным"),
 });
 
+const initialValues = {
+  lastName: "",
+  firstName: "",
+  surname: "",
+  gender: "male",
+  birthday: null,
+  phoneNumber: "",
+  email: "",
+  address: "",
+  employer: "",
+};
+
 export const Form = ({ children, ...props }) => {
   const {
     register,
@@ -39,11 +51,14 @@ export const Form = ({ children, ...props }) => {
   } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema),
+    defaultValues: initialValues,
   });
 
   const onSubmit = (data) => {
+    alert("Форма валидна, отправляется запрос");
     console.log(data);
   };
+
   return (
     <MainContainer>
       <form
@@ -82,8 +97,12 @@ export const Form = ({ children, ...props }) => {
           error={!!errors.surname}
           helperText={errors?.surname?.message}
         />
-        <GenderSelect register={register} errors={errors} />
-        <BirthdayPicker control={control} errors={errors} />
+        <GenderSelect
+          register={register}
+          errors={errors}
+          defaultValue={initialValues.gender}
+        />
+        <BirthdayPicker control={control} errors={errors} defaultValue={initialValues.birthday}/>
         <Input
           {...register("phoneNumber")}
           id="phoneNumber"
@@ -110,7 +129,7 @@ export const Form = ({ children, ...props }) => {
           helperText={errors?.email?.message}
         />
         <Input
-
+        {...register("address")}
           id="address"
           type="text"
           label="Адрес постоянной регистрации"
@@ -120,7 +139,7 @@ export const Form = ({ children, ...props }) => {
           helperText={errors?.email?.message}
         />
         <Input
-
+        {...register("employer")}
           id="employer"
           type="employer"
           label="Название работодателя"
