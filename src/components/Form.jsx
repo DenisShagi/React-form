@@ -4,21 +4,33 @@ import { Input } from "./Input";
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "./PrimaryButton";
 import * as yup from "yup";
+import parsePhoneNumberFromString from "libphonenumber-js";
 
 const schema = yup.object().shape({
   lastName: yup
     .string()
     .matches(/^([^0-9]*)$/, "Поле содержит недопустимые символы")
     .required("Поле является обязательным"),
-    firstName: yup
+  firstName: yup
     .string()
     .matches(/^([^0-9]*)$/, "Поле содержит недопустимые символы")
     .required("Поле является обязательным"),
-    surname: yup
+  surname: yup
     .string()
     .matches(/^([^0-9]*)$/, "Поле содержит недопустимые символы")
     .required("Поле является обязательным"),
+  email: yup.string().email("Введен некорректный адрес почты"),
 });
+
+const normalizePhoneNumber = (value) => {
+    const phoneNumber = parsePhoneNumberFromString(value)
+    if(!phoneNumber){
+        return value
+    }
+    return(
+        phoneNumber.formatInternational()
+    )
+}
 export const Form = ({ children, ...props }) => {
   const {
     register,
@@ -70,7 +82,26 @@ export const Form = ({ children, ...props }) => {
           error={!!errors.surname}
           helperText={errors?.surname?.message}
         />
-        
+        <Input
+          {...register("email")}
+          id="email"
+          type="email"
+          label="Email (необязательно)"
+          name="email"
+          error={!!errors.email}
+          helperText={errors?.email?.message}
+        />
+        <Input
+        {...register("phoneNumber")}
+          id="phoneNumber"
+          type="tel"
+          label="Мобильный телефон"
+          name="phoneNumber"
+          onChange={(event) => {
+            event.target.value = normalizePhoneNumber(event.target.value)
+          }}
+         
+        />
         <PrimaryButton />
       </form>
     </MainContainer>
