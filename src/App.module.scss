@@ -21,7 +21,6 @@ main {
   justify-content: center;
   align-content: flex-start;
 
-
   margin: 0 auto;
 }
 
@@ -35,7 +34,7 @@ form {
 form > :nth-child(1),
 form > :nth-child(2),
 form > :nth-child(3),
-form > :nth-child(8), 
+form > :nth-child(8),
 form > :nth-child(9) {
   grid-column: span 2;
 }
