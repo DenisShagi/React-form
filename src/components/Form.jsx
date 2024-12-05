@@ -8,6 +8,7 @@ import { GenderSelect } from "./GenderSelect";
 import { BirthdayPicker } from "./BirthdayPicker";
 import styles from "../App.module.scss";
 import * as yup from "yup";
+import Swal from "sweetalert2";
 
 const schema = yup.object().shape({
   lastName: yup
@@ -54,7 +55,8 @@ export const Form = ({ children, ...props }) => {
   });
 
   const onSubmit = (data) => {
-    alert("Форма валидна, отправляется запрос");
+    // alert("Форма валидна, отправляется запрос");
+    Swal.fire("Форма валидна!", "Отправляется запрос", "success");
     console.log(data);
   };
 
@@ -101,7 +103,11 @@ export const Form = ({ children, ...props }) => {
           errors={errors}
           defaultValue={initialValues.gender}
         />
-        <BirthdayPicker control={control} errors={errors} defaultValue={initialValues.birthday}/>
+        <BirthdayPicker
+          control={control}
+          errors={errors}
+          defaultValue={initialValues.birthday}
+        />
         <Input
           {...register("phoneNumber")}
           id="phoneNumber"
@@ -128,7 +134,7 @@ export const Form = ({ children, ...props }) => {
           helperText={errors?.email?.message}
         />
         <Input
-        {...register("address")}
+          {...register("address")}
           id="address"
           type="text"
           label="Адрес постоянной регистрации"
@@ -138,7 +144,7 @@ export const Form = ({ children, ...props }) => {
           helperText={errors?.email?.message}
         />
         <Input
-        {...register("employer")}
+          {...register("employer")}
           id="employer"
           type="employer"
           label="Название работодателя"
