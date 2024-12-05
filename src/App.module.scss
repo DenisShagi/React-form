@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
+:root {
+  --color-blue: #1976d2;
+  --color-success: #4caf50;
+  --color-paper: #1e1e1e;
+  --color-light: #ffffff;
+  
+  --color-border: #66bb6a;
+
+  --color-background-light: #ffffff;
+  --color-background-dark: #121212;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -43,3 +54,5 @@ form > button {
   grid-column: span 2;
   justify-self: end;
 }
+
+$colorSin: "#1976d2";

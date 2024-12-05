@@ -7,7 +7,7 @@ export const Header = () => {
         fontFamily: 'Nunito',
         textAlign: 'center',
         fontSize: '40px',
-        color: 'deeppink',
+        // color: 'deeppink',
         textShadow: '1px'
     }} component='h1' variant="h5">Информация о сотруднике</Typography>
 }
