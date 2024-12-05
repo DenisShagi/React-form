@@ -1,0 +1,13 @@
+{
+  "app": {
+    "toggleTheme": "Switch to {{theme}} theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "language": "English"
+  },
+  "form": {
+    "errors": {
+        "invalidSymbols": "The field contains invalid characters"
+    }
+  }
+}

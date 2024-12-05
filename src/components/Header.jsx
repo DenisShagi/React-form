@@ -1,13 +1,22 @@
-import React  from "react";
+import React from "react";
 import { Typography } from "@mui/material";
 
 export const Header = () => {
-    return <Typography sx={{
+  return (
+    <Typography
+      sx={{
         margin: (theme) => theme.spacing(3, 0, 2),
-        fontFamily: 'Nunito',
-        textAlign: 'center',
-        fontSize: '40px',
+        fontFamily: "Nunito",
+        textAlign: "center",
+        fontSize: "40px",
         // color: 'deeppink',
-        textShadow: '1px'
-    }} component='h1' variant="h5">Информация о сотруднике</Typography>
-}
+        color: "black",
+        textShadow: "1px",
+      }}
+      component="h1"
+      variant="h5"
+    >
+      Информация о сотруднике
+    </Typography>
+  );
+};
