@@ -25,4 +25,4 @@ MaskedInput.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default MaskedInput;
+

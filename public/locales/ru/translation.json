@@ -1,0 +1,14 @@
+{
+    "app": {
+      "toggleTheme": "Переключиться на {{theme}} тему",
+      "themeLight": "Светлую",
+      "themeDark": "Темную",
+      "language": "Русский"
+    },
+    "form": {
+        "errors": {
+            "invalidSymbols": "Поле содержит недопустимые символы"
+        }
+      }
+  }
+  
